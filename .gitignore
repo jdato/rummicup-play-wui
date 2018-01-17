@@ -2,6 +2,8 @@
 bin/
 /db
 .eclipse
+.gradle
+.idea
 /lib/
 /logs/
 /modules
