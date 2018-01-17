@@ -7,6 +7,7 @@ $(document).ready(function () {
     var PrintSetToPlayingFieldEvent = "PrintTileSetsToPlayingFieldEvent";
     var PrintRackEvent = "PrintRackEvent";
     var PrintPossibleSetsEvent = "PrintPossibleSetsEvent";
+    var PrintPossibleAppendsEvent = "PrintPossibleAppendsEvent";
     var CleanSetsAndAppendsEvent = "CleanPossibleSetsAndAppendsEvent";
 
     if ("WebSocket" in window) {
@@ -37,6 +38,9 @@ $(document).ready(function () {
             case PrintPossibleSetsEvent:
                 printPossibleSets(jsonData);
                 break;
+            case PrintPossibleAppendsEvent:
+                printPossibleAppends(jsonData);
+                break;
             case CleanSetsAndAppendsEvent:
                 cleanSetsAndAppends();
                 break;
@@ -51,7 +55,20 @@ function cleanSetsAndAppends() {
     var possibleSetsPanelContent = document.getElementById("possibleSetsPanelContent");
     possibleSetsPanelContent.remove();
 
-    // TODO clean appends
+    var possibleAppendsPanelContent = document.getElementById("possibleAppendsPanelContent");
+    possibleAppendsPanelContent.remove();
+}
+
+function printPossibleAppends(json) {
+    var possibleAppendsPanelContent = document.getElementById("possibleAppendsPanelContent");
+    if(possibleAppendsPanelContent != null) possibleAppendsPanelContent.remove();
+
+    var possibleAppendsPanel = document.getElementById("possibleAppendsPanel");
+    var possibleAppends = json["html"];
+    var div = document.createElement("DIV");
+    div.id = "possibleAppendsPanelContent";
+    div.innerHTML = possibleAppends;
+    possibleAppendsPanel.appendChild(div);
 }
 
 function printPossibleSets(json) {

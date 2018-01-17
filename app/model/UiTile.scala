@@ -10,11 +10,14 @@ class UiTile(color: String, number: Int) {
     // number - example: 1
     val suffix = "</h2></span>"
 
-    if(number > 9) {
-      prefixTilSingleDoubleDiff + "tileNumberDouble" + prefixColor + color + prefixNumber + number + suffix
-    }
+    if (number == 42) "<span class=\"tile\"><img src=\"assets/images/arrow.png\" height=\"100\" alt=\"\"></span>"
     else {
-      prefixTilSingleDoubleDiff + "tileNumberSingle" + prefixColor + color + prefixNumber + number + suffix
+      if (number > 9) {
+        prefixTilSingleDoubleDiff + "tileNumberDouble" + prefixColor + color + prefixNumber + number + suffix
+      }
+      else {
+        prefixTilSingleDoubleDiff + "tileNumberSingle" + prefixColor + color + prefixNumber + number + suffix
+      }
     }
   }
 }

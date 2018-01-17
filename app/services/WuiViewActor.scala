@@ -25,9 +25,9 @@ class WuiViewActor(homeController: HomeController) extends Actor {
       printRack(player)
     }
     case PrintPossibleTileSets(possibleSets: List[TileSet]) => printPossibleSets(possibleSets)
-    case SetTiles(input: String) => removePossibleMoves()
+    case PrintPossibleAppendsToTileSets(tilesToAppendToTileSet: Map[Tile, TileSet]) => printPossibleAppends(tilesToAppendToTileSet)
 
-    case PrintPossibleAppendsToTileSets(tilesToAppendToTileSet: Map[Tile, TileSet]) => homeController.sendGameStartedJsonToClient("Print Possible Appends To TileSets")
+    case SetTiles(input: String) => removePossibleMoves()
 
     case _ => // homeController.sendGameStartedJsonToClient("No important action for wui")
   }
@@ -63,6 +63,23 @@ class WuiViewActor(homeController: HomeController) extends Actor {
       result += tileSetGerneratorService.generateTileSetHtmlString(uiTilesList)
     })
     homeController.printPossibleSets(result)
+  }
+
+  def printPossibleAppends(tilesToAppendToTileSet: Map[Tile, TileSet]): Unit = {
+    var result = ""
+    tilesToAppendToTileSet.foreach(possibeAppend => {
+      val appendTilesList: ListBuffer[UiTile] = ListBuffer()
+
+      appendTilesList += tileSetGerneratorService.generateTile(possibeAppend._1.color, possibeAppend._1.number)
+
+      appendTilesList += tileSetGerneratorService.generateTile("", 42)
+
+      possibeAppend._2.tiles.foreach(tile => {
+        appendTilesList += tileSetGerneratorService.generateTile(tile.color, tile.number)
+      })
+      result += tileSetGerneratorService.generateTileSetHtmlString(appendTilesList)
+    })
+    homeController.printPossibleAppends(result)
   }
 
   def removePossibleMoves(): Unit = {

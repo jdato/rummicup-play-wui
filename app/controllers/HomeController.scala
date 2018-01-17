@@ -49,6 +49,14 @@ class HomeController @Inject()(cc: ControllerComponents)
     sendJsonToClient(config)
   }
 
+  def printPossibleAppends(possibleAppends: String): Unit = {
+    val config = Json.obj(
+      "event" -> "PrintPossibleAppendsEvent",
+      "html" -> possibleAppends
+    )
+    sendJsonToClient(config)
+  }
+
   def printPossibleSets(possibleSets: String): Unit = {
     val config = Json.obj(
       "event" -> "PrintPossibleSetsEvent",
