@@ -3,12 +3,9 @@ if (window.console) {
 }
 
 $(document).ready(function () {
-    /*
-    var gameStartedEvent = "GameStarted";
-    var cellChangedEvent = "CellChanged";
-    var attackActionResultEvent = "AttackActionResult";
-    var playerWonEvent = "PlayerWon";
-    */
+
+    var printSetToPlayingFieldEvent = "PrintTileSetsToPlayingField";
+
     if ("WebSocket" in window) {
         console.log("WebSocket is supported by your Browser!");
     } else {
@@ -27,10 +24,28 @@ $(document).ready(function () {
     connection.onmessage = function (event) {
 
         var jsonData = JSON.parse(event.data);
+        switch (jsonData.event) {
+            case printSetToPlayingFieldEvent:
+                printTileSetsToPlayingField(jsonData);
+                break;
+        }
 
-        dummyMethodToPrintSomething(jsonData);
+
+        //dummyMethodToPrintSomething(jsonData);
     }
 });
+
+function printTileSetsToPlayingField(json) {
+    var playingFieldPanelContent = document.getElementById("playingFieldPanelContent");
+    playingFieldPanelContent.remove();
+
+    var playingFieldPanel = document.getElementById("playingFieldPanel");
+    var tileSets = json["html"];
+    var div = document.createElement("DIV");
+    div.id = "playingFieldPanelContent";
+    div.innerHTML = tileSets;
+    playingFieldPanel.appendChild(div);
+}
 
 function dummyMethodToPrintSomething(someString) {
     console.log("Application says: " + someString.message)

@@ -2,13 +2,12 @@ package controllers
 
 import javax.inject._
 
-import akka.actor.{Actor, ActorSelection, ActorSystem}
+import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.ws.{Message, TextMessage, WebSocketRequest}
 import akka.stream.Materializer
 import akka.stream.scaladsl.{BroadcastHub, Flow, Keep, MergeHub, Sink, Source}
 import akka.{Done, NotUsed}
-import model.Messages._
 import play.api.libs.json.{JsObject, Json}
 import play.api.mvc._
 import services.GameService
@@ -41,16 +40,25 @@ class HomeController @Inject()(cc: ControllerComponents)
     sendJsonToClient(jsonObject)
   }
 
-  // WS Stuff
+  // Specific WebSocket Stuff
 
+  def printPlayingField(playingfield: String): Unit = {
+    val config = Json.obj(
+      "event" -> "PrintTileSetsToPlayingField",
+      "html" -> playingfield
+    )
+    sendJsonToClient(config)
+  }
+
+  // General WebSocket Stuff
   def sendJsonToClient(json: JsObject): Unit = {
     if (webSocketUrlOpt.isDefined) {
 
 
       val printSink: Sink[Message, Future[Done]] =
         Sink.foreach {
-            case message: TextMessage.Strict =>
-            //println(message.text)
+          case message: TextMessage.Strict =>
+          //println(message.text)
         }
 
 
