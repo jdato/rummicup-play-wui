@@ -1,21 +1,50 @@
 @*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
-
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+@(webSocketUrl: String)(implicit webJarsUtil: org.webjars.play.WebJarsUtil)
 @*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
 @main("Rummikub") {
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     * @welcome(message, style = "scala")
-     *@
-    @game(message)
+    <section id="top">
+        <div class="wrapper">
+            <h1>Welcome to the Rummicup Scala Game in the Play WUI.</h1>
+        </div>
+    </section>
+
+    <div id="content" class="wrapper doc">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Playing field</h2>
+                <div style="border: #222222;
+                    border-radius: 2px;">
+                    Field
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h2>Possible Sets</h2>
+                <div style="border: #222222;
+                    border-radius: 2px;">
+                    Field
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h2>Rack</h2>
+                <div style="border: #222222;
+                    border-radius: 2px;">
+                    Field
+                </div>
+            </div>
+        </div>
+
+        @Html(webJarsUtil.script("jquery.min.js"))
+        @Html(webJarsUtil.script("jquery.flot.min.js"))
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/modernizr-3.5.0.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/hello.js")' data-url='@webSocketUrl'></script>
+    </div>
 
 }
