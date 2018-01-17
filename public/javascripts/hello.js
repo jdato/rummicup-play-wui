@@ -6,6 +6,8 @@ $(document).ready(function () {
 
     var PrintSetToPlayingFieldEvent = "PrintTileSetsToPlayingFieldEvent";
     var PrintRackEvent = "PrintRackEvent";
+    var PrintPossibleSetsEvent = "PrintPossibleSetsEvent";
+    var CleanSetsAndAppendsEvent = "CleanPossibleSetsAndAppendsEvent";
 
     if ("WebSocket" in window) {
         console.log("WebSocket is supported by your Browser!");
@@ -32,12 +34,37 @@ $(document).ready(function () {
             case PrintRackEvent:
                 printRack(jsonData);
                 break;
+            case PrintPossibleSetsEvent:
+                printPossibleSets(jsonData);
+                break;
+            case CleanSetsAndAppendsEvent:
+                cleanSetsAndAppends();
+                break;
         }
 
 
         //dummyMethodToPrintSomething(jsonData);
     }
 });
+
+function cleanSetsAndAppends() {
+    var possibleSetsPanelContent = document.getElementById("possibleSetsPanelContent");
+    possibleSetsPanelContent.remove();
+
+    // TODO clean appends
+}
+
+function printPossibleSets(json) {
+    var possibleSetsPanelContent = document.getElementById("possibleSetsPanelContent");
+    if(possibleSetsPanelContent != null) possibleSetsPanelContent.remove();
+
+    var possibleSetsPanel = document.getElementById("possibleSetsPanel");
+    var possibleSets = json["html"];
+    var div = document.createElement("DIV");
+    div.id = "possibleSetsPanelContent";
+    div.innerHTML = possibleSets;
+    possibleSetsPanel.appendChild(div);
+}
 
 function printRack(json) {
     var rackPanelContent = document.getElementById("rackPanelContent");

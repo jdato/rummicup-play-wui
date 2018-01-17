@@ -42,6 +42,21 @@ class HomeController @Inject()(cc: ControllerComponents)
 
   // Specific WebSocket Stuff
 
+  def removePossibleMoves(): Unit = {
+    val config = Json.obj(
+      "event" -> "CleanPossibleSetsAndAppendsEvent"
+    )
+    sendJsonToClient(config)
+  }
+
+  def printPossibleSets(possibleSets: String): Unit = {
+    val config = Json.obj(
+      "event" -> "PrintPossibleSetsEvent",
+      "html" -> possibleSets
+    )
+    sendJsonToClient(config)
+  }
+
   def printRack(rack: String): Unit = {
     val config = Json.obj(
       "event" -> "PrintRackEvent",

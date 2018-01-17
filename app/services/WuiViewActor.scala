@@ -24,13 +24,16 @@ class WuiViewActor(homeController: HomeController) extends Actor {
       printPlayingField(playingfield)
       printRack(player)
     }
-    case PrintPossibleTileSets(tileSets: List[TileSet]) => homeController.sendGameStartedJsonToClient("Print Possible TileSets")
+    case PrintPossibleTileSets(possibleSets: List[TileSet]) => printPossibleSets(possibleSets)
+    case SetTiles(input: String) => removePossibleMoves()
+
     case PrintPossibleAppendsToTileSets(tilesToAppendToTileSet: Map[Tile, TileSet]) => homeController.sendGameStartedJsonToClient("Print Possible Appends To TileSets")
 
     case _ => // homeController.sendGameStartedJsonToClient("No important action for wui")
   }
 
   def printPlayingField(playingfield: Playingfield): Unit = {
+    removePossibleMoves()
     var result = ""
     playingfield.playedTileSets.foreach(tileSet => {
       val uiTilesList: ListBuffer[UiTile] = ListBuffer()
@@ -48,6 +51,22 @@ class WuiViewActor(homeController: HomeController) extends Actor {
       uiTilesList += tileSetGerneratorService.generateTile(tile.color, tile.number)
     })
     homeController.printRack(tileSetGerneratorService.generateTileSetHtmlString(uiTilesList))
+  }
+
+  def printPossibleSets(possibleSets: List[TileSet]): Unit = {
+    var result = ""
+    possibleSets.foreach(tileSet => {
+      val uiTilesList: ListBuffer[UiTile] = ListBuffer()
+      tileSet.tiles.foreach(tile => {
+        uiTilesList += tileSetGerneratorService.generateTile(tile.color, tile.number)
+      })
+      result += tileSetGerneratorService.generateTileSetHtmlString(uiTilesList)
+    })
+    homeController.printPossibleSets(result)
+  }
+
+  def removePossibleMoves(): Unit = {
+    homeController.removePossibleMoves()
   }
 
 }
