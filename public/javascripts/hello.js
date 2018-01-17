@@ -4,7 +4,8 @@ if (window.console) {
 
 $(document).ready(function () {
 
-    var printSetToPlayingFieldEvent = "PrintTileSetsToPlayingField";
+    var PrintSetToPlayingFieldEvent = "PrintTileSetsToPlayingFieldEvent";
+    var PrintRackEvent = "PrintRackEvent";
 
     if ("WebSocket" in window) {
         console.log("WebSocket is supported by your Browser!");
@@ -25,8 +26,11 @@ $(document).ready(function () {
 
         var jsonData = JSON.parse(event.data);
         switch (jsonData.event) {
-            case printSetToPlayingFieldEvent:
+            case PrintSetToPlayingFieldEvent:
                 printTileSetsToPlayingField(jsonData);
+                break;
+            case PrintRackEvent:
+                printRack(jsonData);
                 break;
         }
 
@@ -34,6 +38,18 @@ $(document).ready(function () {
         //dummyMethodToPrintSomething(jsonData);
     }
 });
+
+function printRack(json) {
+    var rackPanelContent = document.getElementById("rackPanelContent");
+    rackPanelContent.remove();
+
+    var rackPanel = document.getElementById("rackPanel");
+    var rack = json["html"];
+    var div = document.createElement("DIV");
+    div.id = "rackPanelContent";
+    div.innerHTML = rack;
+    rackPanel.appendChild(div);
+}
 
 function printTileSetsToPlayingField(json) {
     var playingFieldPanelContent = document.getElementById("playingFieldPanelContent");

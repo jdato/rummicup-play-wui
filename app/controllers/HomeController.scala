@@ -42,9 +42,17 @@ class HomeController @Inject()(cc: ControllerComponents)
 
   // Specific WebSocket Stuff
 
+  def printRack(rack: String): Unit = {
+    val config = Json.obj(
+      "event" -> "PrintRackEvent",
+      "html" -> rack
+    )
+    sendJsonToClient(config)
+  }
+
   def printPlayingField(playingfield: String): Unit = {
     val config = Json.obj(
-      "event" -> "PrintTileSetsToPlayingField",
+      "event" -> "PrintTileSetsToPlayingFieldEvent",
       "html" -> playingfield
     )
     sendJsonToClient(config)
