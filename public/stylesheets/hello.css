@@ -1,0 +1,39 @@
+.pane-heading {
+    padding: 15px;
+    color: white;
+}
+
+.panel {
+    background: #6dae38;
+    min-height: 250px;
+    border:2px solid #2d6201;
+}
+
+.actualField {
+    padding: 15px;
+}
+
+.tileSet {
+
+}
+
+.tile {
+    position: relative;
+    width: 100%; /* for IE 6 */
+}
+
+.tileNumberDouble {
+    position: absolute;
+    top: -68px;
+    left: 19px;
+    width: 100%;
+    color: red;
+}
+
+.tileNumberSingle {
+    position: absolute;
+    top: -68px;
+    left: 27px;
+    width: 100%;
+    color: red;
+}

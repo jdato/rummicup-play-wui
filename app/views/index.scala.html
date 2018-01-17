@@ -11,33 +11,107 @@
 @main("Rummikub") {
 
     <section id="top">
-        <div class="wrapper">
-            <h1>Welcome to the Rummicup Scala Game in the Play WUI.</h1>
+        <div class="wrapper" style="align-content: center">
+            <h1>Rummicup Scala Game</h1>
         </div>
     </section>
 
     <div id="content" class="wrapper doc">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Playing field</h2>
-                <div style="border: #222222;
-                    border-radius: 2px;">
-                    Field
+
+        <div class="panel">
+            <h2 class="pane-heading">Playing field</h2>
+
+            <div id="plaingFieldPanel" class="actualField">
+
+                <div class="tileSet">
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberDouble">12</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberDouble"style="color:black;">12</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberDouble" style="color:blue;">12</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberDouble" style="color:yellow;">12</h2>
+                    </span>
+
+                </div>
+
+                <div class="tileSet">
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberSingle">7</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberSingle">8</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberSingle">9</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberDouble">10</h2>
+                    </span>
+
+                </div>
+
+                <div class="tileSet">
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberSingle">1</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberSingle">2</h2>
+                    </span>
+
+                    <span class="tile">
+                        <img id="openingImage" src="@routes.Assets.versioned("images/tile.png")" height="100" alt="">
+                        <h2 class="tileNumberSingle">3</h2>
+                    </span>
+
                 </div>
             </div>
-            <div class="col-md-12">
-                <h2>Possible Sets</h2>
-                <div style="border: #222222;
-                    border-radius: 2px;">
-                    Field
-                </div>
+
+        </div>
+
+        <div class="panel">
+            <h2 class="pane-heading">Possible Sets</h2>
+            <div id="possibleSetsPanel" class="actualField">
+
+                Stone
             </div>
-            <div class="col-md-12">
-                <h2>Rack</h2>
-                <div style="border: #222222;
-                    border-radius: 2px;">
-                    Field
-                </div>
+        </div>
+
+        <div class="panel">
+            <h2 class="pane-heading">Possible Appends</h2>
+            <div id="possibleAppendsPanel" class="actualField">
+                Stone
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2 class="pane-heading">Rack</h2>
+            <div id="rackPanel" class="actualField">
+                Stone
             </div>
         </div>
 

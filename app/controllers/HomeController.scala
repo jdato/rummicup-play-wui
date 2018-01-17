@@ -46,11 +46,13 @@ class HomeController @Inject()(cc: ControllerComponents)
   def sendJsonToClient(json: JsObject): Unit = {
     if (webSocketUrlOpt.isDefined) {
 
+
       val printSink: Sink[Message, Future[Done]] =
         Sink.foreach {
-          case message: TextMessage.Strict =>
-            println(message.text)
+            case message: TextMessage.Strict =>
+            //println(message.text)
         }
+
 
       val jsonSource: Source[Message, NotUsed] =
         Source.single(TextMessage(json.toString()))
