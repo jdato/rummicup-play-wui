@@ -1,10 +1,12 @@
-name := """play-scala-starter-example"""
+name := """play-rummikub"""
 
 version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
+
+logLevel := Level.Info
 
 scalaVersion := "2.12.4"
 
